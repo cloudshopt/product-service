@@ -70,5 +70,3 @@ kubectl exec -n cloudshopt-dev -it deploy/product-service-dev -c app -- sh
 
 # php artisan migrate
 ```
-
-asd
