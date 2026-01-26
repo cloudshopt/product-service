@@ -1,4 +1,4 @@
-name: Build & Deploy user-service
+name: Build & Deploy product-service
 
 on:
   push:
@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: user-service-${{ github.ref }}
+  group: product-service-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
     uses: cloudshopt/infrastructure/.github/workflows/build-image.yaml@main
     with:
       prod_branch: main
-      image_repository: timib22/cloudshopt-users-php
+      image_repository: timib22/cloudshopt-products-php
       dockerfile: .docker/php/prod.Dockerfile
       docker_context: .
     secrets:
@@ -32,22 +32,22 @@ jobs:
       infra_repo: cloudshopt/infrastructure
       infra_ref: main
 
-      helm_chart_path: helm/user-service
-      values_prod: helm/user-service/values.yaml
-      values_dev: helm/user-service/values-dev.yaml
+      helm_chart_path: helm/product-service
+      values_prod: helm/product-service/values.yaml
+      values_dev: helm/product-service/values-dev.yaml
 
       namespace_prod: cloudshopt
       namespace_dev: cloudshopt-dev
-      release_prod: user-service
-      release_dev: user-service-dev
+      release_prod: product-service
+      release_dev: product-service-dev
 
-      image_repository: timib22/cloudshopt-users-php
+      image_repository: timib22/cloudshopt-products-php
       image_tag: ${{ needs.build.outputs.image_tag }}
 
-      health_prod: http://app.timotejblazic.eu/api/users/info
-      health_dev: http://app-dev.timotejblazic.eu/api/users/info
+      health_prod: http://app.timotejblazic.eu/api/products/info
+      health_dev: http://app-dev.timotejblazic.eu/api/products/info
 
-      k8s_secret_name: user-service-secrets
+      k8s_secret_name: product-service-secrets
 
     secrets:
       KUBECONFIG_B64: ${{ secrets.KUBECONFIG_B64 }}
