@@ -3,6 +3,8 @@
 ## Create product database + user on mysql server
 ```
 kubectl -n cloudshopt exec -it cloudshopt-mysql-0 -- bash
+
+mysql -u root -prootpass
 ```
 
 ```
