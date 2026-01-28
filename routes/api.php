@@ -52,9 +52,5 @@ Route::get('/database', function () {
     }
 });
 
-
-
-
-
-Route::get('/items', [ProductController::class, 'index']);     // /api/products
-Route::get('/items/{id}', [ProductController::class, 'show']);  // /api/products/{id}
+Route::get('/items', [ProductController::class, 'index']);
+Route::get('/items/{id}', [ProductController::class, 'show']);
