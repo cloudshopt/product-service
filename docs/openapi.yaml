@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: CloudShopt Product Service API
+  version: 0.1.0
+  description: API for product catalog
+servers:
+  - url: /api
+tags:
+  - name: meta
+  - name: products
+
+paths:
+  /info:
+    get:
+      tags: [meta]
+      summary: Service info (test endpoint)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service:
+                    type: string
+                    example: product-service
+                  status:
+                    type: string
+                    example: ok
+
+  /health:
+    get:
+      tags: [meta]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+
+  /products:
+    get:
+      tags: [products]
+      summary: List products (test placeholder)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+components:
+  responses:
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "T-Shirt"
+        price:
+          type: number
+          format: float
+          example: 19.99
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Internal Server Error"
+        code:
+          type: string
+          example: "SERVER_ERROR"
+        details:
+          type: object
+          additionalProperties: true
