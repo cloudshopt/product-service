@@ -21,7 +21,7 @@ Route::get('/docs', function () {
 
 Route::get('/info', function () {
     return response()->json([
-        'ok11' => true,
+        'ok' => true,
         'service' => config('app.name'),
         'sha' => env('IMAGE_SHA', null),
         'time' => now()->toISOString(),
