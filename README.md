@@ -20,3 +20,25 @@ FLUSH PRIVILEGES;
 kubectl exec -n cloudshopt -it deploy/product-service -c app -- sh
 # php artisan migrate
 ```
+
+## GraphQL (Lighthouse)
+
+This service exposes a GraphQL API (powered by Lighthouse) for querying product data.
+
+### Endpoint
+- `POST /api/products/graphql`
+
+### Schema
+```graphql
+type Product {
+  id: ID!
+  name: String!
+  description: String
+  price: Float!
+}
+
+type Query {
+  products: [Product!]! @all
+  product(id: ID! @whereKey): Product @find
+}
+```
