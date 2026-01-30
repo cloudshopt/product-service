@@ -55,5 +55,3 @@ Route::get('/database', function () {
 
 Route::get('/items', [ProductController::class, 'index']);
 Route::get('/items/{id}', [ProductController::class, 'show']);
-
-Route::get('/metrics', MetricsController::class);
