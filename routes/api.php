@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -54,3 +55,5 @@ Route::get('/database', function () {
 
 Route::get('/items', [ProductController::class, 'index']);
 Route::get('/items/{id}', [ProductController::class, 'show']);
+
+Route::get('/metrics', MetricsController::class);

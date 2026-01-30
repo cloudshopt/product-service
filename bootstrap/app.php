@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\PrometheusMetrics;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->append(PrometheusMetrics::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
